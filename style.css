@@ -15,19 +15,20 @@ html {
   display: block;
   width:100%;
   height: 100vh;
+  color: #fff;
 }
 #root header {
   display: flex;
   flex-direction: row;
   padding: 0 10px;
-  background-color: #ccc;
+  background-color: #EA2027;
   width: 100%;
   min-height: 50px;
   align-items: center;
   justify-content: space-between;
 }
-#root header button {
-  padding: 5px;
+header h1 {
+  font-style: italic;
 }
 .list-container {
   display: flex;
@@ -36,21 +37,42 @@ html {
   height: 100%;
   width: 100%;
   padding:10px;
-  background-color: #e8e8e8;
+  background-color: #badc58;
   height: calc(100% - 50px);
   position: relative;
 
 }
 .list-container .no-list {
   position: absolute;
-  top: 20px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: #fff;
+  padding: 10px 40px;
+  background-color: red;
 }
 .list-container .list {
   flex-basis: 18%;
   flex-grow: 1;
-  background-color: #fefefe;
+  border: 2px dotted #6ab04c;
+}
+.list-container .list .list-header {
+  background-color: #EE5A24;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-style: italic;
+}
+.list-header h2 {
+  width: 100%;
+  margin: 0 0 10px 0;
+}
+.list-container .list .cards {
+  padding: 10px;
 }
 .list-container .list:only-child {
   flex-grow: 0;
@@ -66,6 +88,7 @@ html {
   height: 100%;
   background-color: rgba(0,0,0,0.5);
   z-index: 100;
+  color: #000;
 }
 .modal input {
   width: 100%;
@@ -88,26 +111,36 @@ html {
   position: absolute;
   top: 15px;
   right: 15px;
-  background-color: #ccc;
+  background-color: #5758BB;
   padding: 10px 5px;
   line-height: 0; 
+  color: #fff;
   cursor: pointer;
 }
 .modal form label {
   display: block;
   margin-bottom: 10px;
 }
-button {
-  border: 1px solid #ccc;
+button, .editbtn {
   outline: none;
-  background-color: #d8d8d8;
-  color: #000;
+  background-color: #353b48;
+  outline: none;
+  border: 0;
+  color: #fff;
   padding: 5px 15px;
   cursor: pointer;
+}
+button.cards-add {
+  background-color: #353b48;
+  padding: 10px 15px;
+}
+.editbtn, .deletebtn {
+  padding: 3px 5px;
+  font-size: 12px;
 }
 .modal.list, .modal.card {
   display: none;
 }
-.modal.list.show {
+.modal.show {
   display: block;
 }

@@ -5,16 +5,16 @@ export class View {
         this.appHeader = this.createNode({ 'element': 'header', 'class': ['header'] },
             [
                 { 'element': 'h1', 'text': 'Sprint 1' },
-                { 'element': 'button', 'text': 'Add List' }
+                { 'element': 'button', 'text': 'Add List',  'id': 'add-list' }
             ]);
 
         this.listModal = this.createNode({ 'element': 'div', 'class': ['modal', 'list'], 'subElement': 'form', 'subContainer': true },
             [
                 { 'element': 'label', 'text': 'Create List' },
-                { 'element': 'input', 'text': null, 'id': 'mainList', 'type': 'text', 'placeholder': '' },
-                { 'element': 'button', 'text': 'Add' },
-                { 'element': 'span', 'text': 'X' }
-            ]
+                { 'element': 'input', 'text': null, 'id': 'mainList', 'type': 'text', 'placeholder': '', 'value':'' },
+                { 'element': 'button', 'text': 'Add', 'id': 'add-list-item' },
+                { 'element': 'span', 'text': 'X', 'id': 'close-add-list' }
+            ]   
         );
         this.cardModal = this.createNode({ 'element': 'div', 'class': ['modal', 'card'], 'subElement': 'form', 'subContainer': true },
             [
@@ -49,6 +49,9 @@ export class View {
                     if (child.class) {
                         el.classList.add(child.class);
                     }
+                    if(child.id) {
+                        el.id = child.id;
+                    }
                     if (!subContainer) {
                         container.append(el);
                     } else {
@@ -57,6 +60,7 @@ export class View {
                 } else {
                     let el = this.createElement(child.element);
                     el.type = child.type;
+                    el.value = child.value;
                     el.placeholder = child.placeholder;
                     el.id = child.id;
                     if (!subContainer) {
@@ -103,27 +107,27 @@ export class View {
             this.listDisplay.removeChild(this.listDisplay.firstChild);
         }
         if (data.lists.length === 0) {
-            let noRecord = this.createElementWithText('div', 'No Lists to show', 'no-list');
+            let noRecord = this.createElementWithText('div', 'No Lists Present in App!!! Try Add lists !!!', 'no-list');
             this.listDisplay.append(noRecord);
         } else {
             this.listDisplay.innerHTML = '';
             data.lists.forEach((rec) => {
                 let listCol = this.createElement('div', 'list');                
-                listCol.id = rec.id;
+                listCol.id = `list-${rec.id}`;
                 let listHeader = this.createElement('div', 'list-header');
                 let deleteButton = this.createElement('button', 'deletebtn');
-                deleteButton.id = `delete${rec.id}`;
+                deleteButton.id = `delete_${rec.id}`;
                 deleteButton.textContent = 'Delete';
                 let h2 = this.createElementWithText('h2', rec.name);                
                 let span = this.createElement('span');
                 span.textContent = 'Edit';
-                span.id=`edit${rec.id}`;
+                span.id=`edit_${rec.id}`;
                 span.classList.add('editbtn');
                 listHeader.append(h2, span, deleteButton);
                 let cards = this.createElement('div', 'cards');
                 let addCardsBtn = this.createElement('button', 'cards-add');
                 addCardsBtn.textContent = 'Add Cards';
-                addCardsBtn.id = `add-cards-${rec.id}`;
+                addCardsBtn.id = `add-cards_${rec.id}`;
                 cards.append(addCardsBtn);
                 listCol.append(listHeader, cards);                
                 this.listDisplay.append(listCol);
@@ -131,36 +135,29 @@ export class View {
         }
     }
 
-    bindAddList(handler, selector) {
-        document.querySelector(selector).addEventListener('click', event => {
-        console.log('triggering modal click');
-            event.preventDefault();
-            let listValue = this.getElement('#mainList');
-            console.log(listValue.value);
-            if (listValue.value) {
-                handler(listValue.value);
-                listValue.value = '';
-                document.querySelector('.modal.list').classList.remove('show');
-            }
-        })
+    getListValue(handler, selector, id) {
+        let listValue = this.getElement(selector);
+        if (listValue.value) {
+            handler(listValue.value, id);
+            listValue.value = '';
+            document.querySelector('.modal.list').classList.remove('show');
+        }                
+    }       
+    bindUpdateListModal(value) {
+        this.updateListModal = this.createNode({ 'element': 'div', 'class': ['modal', 'list', 'update'], 'subElement': 'form', 'subContainer': true },
+            [
+                { 'element': 'label', 'text': 'Update List' },
+                { 'element': 'input', 'text': null, 'id': 'updateList', 'type': 'text', 'placeholder': '', 'value': value.name },
+                { 'element': 'button', 'text': 'Update', 'id': `update-list_${value.id}` },
+                { 'element': 'span', 'text': 'X', 'id': 'close-update' }
+            ]
+        );
+        this.container.append(this.updateListModal);
     }
-
-    bindShowModal(handler, selector) {
-        document.querySelector(selector).addEventListener('click', event => {
-            let listModal = this.getElement('.modal.list');
-            handler(listModal);
-        })
-    }
-    bindHideModal(handler, selector) {
-        document.querySelector(selector).addEventListener('click', event => {
-            let listModal = this.getElement('.modal.list');
-            handler(listModal);
-        })
-    }
-    bindListClick(handler) {
-        document.querySelector('.list-container').addEventListener('click', event => {
-            handler(event);
-        })
+    bindHandleAppClick(handler) {
+        document.addEventListener('click', function(e){
+            handler(e);
+         });
     }
 }
 

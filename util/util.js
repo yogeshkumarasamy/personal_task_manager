@@ -1,6 +1,31 @@
 let data = {
     "board": "Sprint 1",
-    "lists": []
+    "lists": [{
+        "id": 1,
+        "name": "Backlog Items",
+        "cards": []            
+    },
+    {
+        "id": 1,
+        "name": "Todo",
+        "cards": []            
+    },
+    {
+        "id": 2,
+        "name": "In Progress",
+        "cards": []            
+    },
+    {
+        "id": 4,
+        "name": "Done",
+        "cards": []            
+    },
+    {
+        "id": 5,
+        "name": "Closed",
+        "cards": []            
+    }
+]
 };
 const prepareInitData = (data) => {
     return data;

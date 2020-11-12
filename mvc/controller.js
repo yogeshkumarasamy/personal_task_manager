@@ -2,40 +2,56 @@ export class Controller {
     constructor(model, view) {
         this.model = model;
         this.view = view;
-
         // Binding onList Changed in model to keep model and view sync whenever model changes
         this.model.bindOnListChanged(this.onListChanged);
-
-        this.view.bindShowModal(this.handleShowModal, '.header button');
-        this.view.bindHideModal(this.handleHideModal, '.modal.list span');
-        this.view.bindAddList(this.handleAddList, '.modal.list button');
-        this.view.bindListClick(this.handleListClick);
-
-
+        this.view.bindHandleAppClick(this.handleAppClick); //Event delegation Pattern  
         this.onListChanged(this.model.data); //To set initial data
     }
     onListChanged = (data) => {
         this.view.displayLists(data);
     }
     handleAddList = (listText) => {
-        console.log('invoked');
         this.model.addList(listText);        
     }
-    handleShowModal = (el) => {
+    handleEditList = (text, id) => {
+        this.model.editList(id, text);
+    }
+    handleShowModal = (selector) => {
+        let el = document.querySelector(selector);
         el.classList.add('show');
     }
-    handleHideModal = (el) => {
+    handleHideModal = (selector) => {
+        let el = document.querySelector(selector);
         el.classList.remove('show');
     }
-    handleListClick = (ev) => {
-        // this.model.deleteList(ev.target.id);
-        let action = ev.target.classList.value;        
-        let listId = document.querySelector('#'+ev.target.id).parentElement.parentElement.id;
-        if(action === 'deletebtn') {
-            this.model.deleteList(listId);
-        } else if( action === 'editbtn') {   
-            console.log(this.model.getList(listId));
-        }       
-
+    
+    handleAppClick = (ev) => {
+        let actionItem = ev.target.id;
+        let [ action, id] = ev.target.id.split('_');
+        id = (id) ? parseInt(id) : null;
+        switch(action) {
+         case "add-list":
+         this.handleShowModal('.modal.list');
+         break;
+         case "close-add-list":
+         this.handleHideModal('.modal.list');         
+         case "add-list-item":
+         this.view.getListValue(this.handleAddList, '#mainList');
+         break;
+         case "delete":
+         this.model.deleteList(id);
+         case "edit":
+         this.view.bindUpdateListModal(this.model.getList(id));
+         this.handleShowModal('.modal.update');
+         break;
+         case "close-update":
+         this.handleHideModal('.modal.update');
+         document.querySelector('.modal.list.update').remove();
+         break;
+         case "update-list":
+         this.view.getListValue(this.handleEditList, '#updateList', id);
+         default:
+         return;   
+        }        
     }
 }
