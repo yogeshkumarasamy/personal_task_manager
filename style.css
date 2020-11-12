@@ -1,0 +1,113 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+
+#root {
+  display: block;
+  width:100%;
+  height: 100vh;
+}
+#root header {
+  display: flex;
+  flex-direction: row;
+  padding: 0 10px;
+  background-color: #ccc;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+#root header button {
+  padding: 5px;
+}
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  padding:10px;
+  background-color: #e8e8e8;
+  height: calc(100% - 50px);
+  position: relative;
+
+}
+.list-container .no-list {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.list-container .list {
+  flex-basis: 18%;
+  flex-grow: 1;
+  background-color: #fefefe;
+}
+.list-container .list:only-child {
+  flex-grow: 0;
+}
+.list-container .list + .list {
+  margin: 0 10px;
+}
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+}
+.modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;  
+}
+.modal input + button {
+  margin-top: 10px;
+}
+.modal form {
+  position: absolute;
+  width: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px 30px;
+}
+.modal form span {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ccc;
+  padding: 10px 5px;
+  line-height: 0; 
+  cursor: pointer;
+}
+.modal form label {
+  display: block;
+  margin-bottom: 10px;
+}
+button {
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: #d8d8d8;
+  color: #000;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+.modal.list, .modal.card {
+  display: none;
+}
+.modal.list.show {
+  display: block;
+}

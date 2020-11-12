@@ -1,0 +1,6 @@
+JSON STRUCTURE
+Board
+    Lists
+        List - delete
+            cards 
+

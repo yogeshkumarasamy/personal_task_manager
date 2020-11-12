@@ -1,0 +1,42 @@
+<header>
+      <h1>Sample Board</h1>
+      <button>+</button>
+    </header>
+    <section class="list-container">
+      <div class="list" id="list1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>list header</h2>
+        <div class="card"></div>
+      </div>
+      <div class="list" id="list2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>list header</h2>
+        <div class="card"></div>
+      </div>
+      <div class="list" id="list3" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>list header</h2>
+        <div class="card"></div>
+      </div>
+      <div class="list" id="list4" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>list header</h2>
+        <div class="card"></div>
+      </div>
+      <div class="list" id="list5" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h2>list header</h2>
+        <img id="drag1" src="https://www.w3schools.com/html/img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69">
+        <div class="card"></div>
+      </div>
+
+      <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+    
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+    
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+    </script>

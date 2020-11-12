@@ -1,0 +1,55 @@
+{
+    "board": "Sprint 1",
+    "lists": [
+        {
+            "id": 1,
+            "name": "list1",
+            "cards": [
+                {
+                    "id": 1,
+                    "title": "list2",
+                    "description": "description2",
+                    "comments": [
+                        {"comment": "test-1", "date": "10-01-20"},
+                        {"comment": "test-2", "date": "10-02-20"}
+                    ]
+                },
+                {
+                    "id": 2,
+                    "title": "list2",
+                    "description": "description2",
+                    "comments": [
+                        {"comment": "test-1", "date": "10-01-20"},
+                        {"comment": "test-2", "date": "10-02-20"}
+                    ]
+                }
+
+            ]            
+        },
+        {
+            "id": 2,
+            "name": "list2",
+            "cards": [
+                {
+                    "id": 1,
+                    "title": "list2",
+                    "description": "description2",
+                    "comments": [
+                        {"comment": "test-1", "date": "10-01-20"},
+                        {"comment": "test-2", "date": "10-02-20"}
+                    ]
+                },
+                {
+                    "id": 2,
+                    "title": "list2",
+                    "description": "description2",
+                    "comments": [
+                        {"comment": "test-1", "date": "10-01-20"},
+                        {"comment": "test-2", "date": "10-02-20"}
+                    ]
+                }
+
+            ]            
+        }        
+    ]
+}
