@@ -74,7 +74,6 @@ export class View {
         if (subContainer) {
             container.append(subContainer);
         }
-        console.log(container);
         return container;
     }
 
@@ -140,7 +139,6 @@ export class View {
         if (listValue.value) {
             handler(listValue.value, id);
             listValue.value = '';
-            document.querySelector('.modal.list').classList.remove('show');
         }                
     }       
     bindUpdateListModal(value) {

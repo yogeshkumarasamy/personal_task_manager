@@ -54,7 +54,6 @@ export class Model {
             cards: []
         };
         this.data.lists.push(list);
-        console.log(this.data);
         
         this.onListChanged(this.data);
         setStorage(fetchKey, this.data);
@@ -63,6 +62,7 @@ export class Model {
 
     editList(id, updateText) {
         this.data.lists = updateList(this.data.lists, id, updateText);
+        this.onListChanged(this.data);
         setStorage(fetchKey, this.data);
     }
     getList(id) {
@@ -70,7 +70,6 @@ export class Model {
     }
     deleteList(id) {
         this.data.lists = removeList(this.data.lists, id);
-        console.log(this.data.lists);
         setStorage(fetchKey, this.data);        
         this.onListChanged(this.data);
     }

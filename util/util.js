@@ -6,12 +6,12 @@ let data = {
         "cards": []            
     },
     {
-        "id": 1,
+        "id": 2,
         "name": "Todo",
         "cards": []            
     },
     {
-        "id": 2,
+        "id": 3,
         "name": "In Progress",
         "cards": []            
     },

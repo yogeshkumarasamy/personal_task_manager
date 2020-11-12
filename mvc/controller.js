@@ -37,6 +37,7 @@ export class Controller {
          this.handleHideModal('.modal.list');         
          case "add-list-item":
          this.view.getListValue(this.handleAddList, '#mainList');
+         this.handleHideModal('.modal.list');
          break;
          case "delete":
          this.model.deleteList(id);
@@ -50,6 +51,8 @@ export class Controller {
          break;
          case "update-list":
          this.view.getListValue(this.handleEditList, '#updateList', id);
+         this.handleHideModal('.modal.update');         
+         document.querySelector('.modal.list.update').remove();
          default:
          return;   
         }        
