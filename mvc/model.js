@@ -41,7 +41,7 @@ export class Model {
     }
     deleteCard(listId, cardId) {
         this.data.lists = removeCard(this.data.lists, listId, cardId);
-        setStorage(fetchKey, this.data);
+        setStorage(fetchKey, this.data);        
     }
     addList(listName) {
         if(this.data.lists.length >= 5) {
@@ -69,8 +69,10 @@ export class Model {
         return fetchList(this.data.lists, id); 
     }
     deleteList(id) {
-        this.data.lists = removeList(this.data.lists, id);
-        setStorage(fetchKey, this.data);        
+        this.data.lists = removeList(this.data.lists, id);        
+        if(id && !getStorage(id)) {            
+            setStorage(fetchKey, this.data);
+        }           
         this.onListChanged(this.data);
     }
 }

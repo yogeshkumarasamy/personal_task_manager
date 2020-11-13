@@ -12,7 +12,6 @@ export const storageTest = function (){
 export const setStorage = (key, obj) => {
     if(storageTest() === true) {
         let data = JSON.stringify(obj);
-        console.log(data);
         localStorage.setItem(key, data);
     }
 }
